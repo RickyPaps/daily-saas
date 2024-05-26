@@ -16,18 +16,7 @@ export async function POST(req: NextResponse) {
       publicKey: EMAILJS_PUBLIC_KEY!,
       privateKey: EMAILJS_PRIVATE_KEY!,
     })
-    .then(
-      () => {
-        return NextResponse.json(
-          { response: "Email sent successfully" },
-          { status: 200 }
-        );
-      },
-      () => {
-        NextResponse.json(
-          { response: "Failed to send email" },
-          { status: 500 }
-        );
-      }
-    );
+    .then((response) => {
+      return NextResponse.json({ response: response });
+    });
 }
