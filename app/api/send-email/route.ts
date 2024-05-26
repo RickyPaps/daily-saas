@@ -17,11 +17,17 @@ export async function POST(req: NextResponse) {
       privateKey: EMAILJS_PRIVATE_KEY!,
     })
     .then(
-      (response) => {
-        return NextResponse.json({ response: response.text }, { status: 200 });
+      () => {
+        return NextResponse.json(
+          { response: "Email sent successfully" },
+          { status: 200 }
+        );
       },
       (err) => {
-        NextResponse.json({ response: err.text });
+        NextResponse.json(
+          { response: "Failed to send email", err: err },
+          { status: 500 }
+        );
       }
     );
 }
