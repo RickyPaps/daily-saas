@@ -23,9 +23,9 @@ export async function POST(req: NextResponse) {
           { status: 200 }
         );
       },
-      (err) => {
+      () => {
         NextResponse.json(
-          { response: "Failed to send email", err: err },
+          { response: "Failed to send email" },
           { status: 500 }
         );
       }
