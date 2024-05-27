@@ -7,6 +7,7 @@ const Notifications: React.FC = () => {
   const [idea, setIdea] = useState<string | null>(null);
 
   useEffect(() => {
+    debugger;
     if (ref.current && idea) {
       ref.current.innerHTML = idea;
 
@@ -19,6 +20,7 @@ const Notifications: React.FC = () => {
   }, [idea]);
 
   useEffect(() => {
+    debugger;
     const FetchIdea = async () => {
       const data = await useFetchGenerate();
       setIdea(data);
