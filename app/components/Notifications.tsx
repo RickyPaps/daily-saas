@@ -11,11 +11,11 @@ const Notifications: React.FC = () => {
     if (ref.current && idea) {
       ref.current.innerHTML = idea;
 
-      const SendEmail = async () => {
-        debugger;
-        useSendEmail(idea);
-      };
-      SendEmail();
+      // const SendEmail = async () => {
+      //   debugger;
+      //   useSendEmail(idea);
+      // };
+      // SendEmail();
     }
   }, [idea]);
 
