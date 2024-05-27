@@ -18,9 +18,6 @@ export async function GET(request: Request) {
     },
   ];
 
-  console.log(messages);
-  console.log(NEXT_PUBLIC_OPENAI_API_KEY);
-
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
