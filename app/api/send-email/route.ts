@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   // const msg = await req.json();
   const data = await req.json();
 
-  const { EMAILJS_PUBLIC_KEY, EMAILJS_PRIVATE_KEY } = process.env;
+  const { NEXT_PUBLIC_EMAILJS_PUBLIC_KEY, NEXT_PUBLIC_EMAILJS_PRIVATE_KEY } = process.env;
 
   const templateParams = {
     to_name: "Ricky",
@@ -17,8 +17,8 @@ export async function POST(req: Request) {
   try {
     emailjs
       .send("service_6wug1nq", "template_mwg23tn", templateParams, {
-        publicKey: EMAILJS_PUBLIC_KEY!,
-        privateKey: EMAILJS_PRIVATE_KEY!,
+        publicKey: NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+        privateKey: NEXT_PUBLIC_EMAILJS_PRIVATE_KEY!,
       })
       .then((response) => {
         console.log(response);

@@ -6,8 +6,8 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const {
     NEXT_PUBLIC_OPENAI_API_KEY,
-    EMAILJS_PUBLIC_KEY,
-    EMAILJS_PRIVATE_KEY,
+    NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+    NEXT_PUBLIC_EMAILJS_PRIVATE_KEY,
   } = process.env;
 
   const messages = [
@@ -43,8 +43,8 @@ export async function GET(request: Request) {
   try {
     emailjs
       .send("service_6wug1nq", "template_mwg23tn", templateParams, {
-        publicKey: EMAILJS_PUBLIC_KEY!,
-        privateKey: EMAILJS_PRIVATE_KEY!,
+        publicKey: NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+        privateKey: NEXT_PUBLIC_EMAILJS_PRIVATE_KEY!,
       })
       .then((response) => {
         console.log('email sent', response);
