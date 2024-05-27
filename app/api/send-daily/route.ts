@@ -19,6 +19,7 @@ export async function GET(request: Request) {
   ];
 
   console.log(messages);
+  console.log(NEXT_PUBLIC_OPENAI_API_KEY);
 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -38,22 +39,22 @@ export async function GET(request: Request) {
 
   return NextResponse.json({ message: "Success", status: 200 });
 
-  // const templateParams = {
-  //   to_name: "Ricky",
-  //   message: data?.choices[0]?.message.content,
-  // };
+  const templateParams = {
+    to_name: "Ricky",
+    message: data?.choices[0]?.message.content,
+  };
 
-  // try {
-  //   emailjs
-  //     .send("service_6wug1nq", "template_mwg23tn", templateParams, {
-  //       publicKey: EMAILJS_PUBLIC_KEY!,
-  //       privateKey: EMAILJS_PRIVATE_KEY!,
-  //     })
-  //     .then((response) => {
-  //       console.log(response);
-  //     });
-  //   return NextResponse.json({ message: "Success", status: 200 });
-  // } catch (error) {
-  //   return NextResponse.json({ message: error, status: 500 });
-  // }
+  try {
+    emailjs
+      .send("service_6wug1nq", "template_mwg23tn", templateParams, {
+        publicKey: EMAILJS_PUBLIC_KEY!,
+        privateKey: EMAILJS_PRIVATE_KEY!,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+    return NextResponse.json({ message: "Success", status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: error, status: 500 });
+  }
 }
