@@ -1,5 +1,5 @@
-export const dynamic = "force-dynamic";
-
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 import emailjs from "@emailjs/nodejs";
 import { NextResponse } from "next/server";
 
@@ -39,7 +39,6 @@ export async function GET(request: Request) {
 
   console.log(templateParams);
 
-
   try {
     emailjs
       .send("service_6wug1nq", "template_mwg23tn", templateParams, {
@@ -47,7 +46,7 @@ export async function GET(request: Request) {
         privateKey: NEXT_PUBLIC_EMAILJS_PRIVATE_KEY!,
       })
       .then((response) => {
-        console.log('email sent', response);
+        console.log("email sent", response);
       });
     return NextResponse.json({ message: "Success", status: 200 });
   } catch (error) {

@@ -1,5 +1,5 @@
+export const runtime = "edge";
 export const dynamic = "force-dynamic";
-
 import { NextResponse } from "next/server";
 import emailjs from "@emailjs/nodejs";
 
@@ -7,7 +7,8 @@ export async function POST(req: Request) {
   // const msg = await req.json();
   const data = await req.json();
 
-  const { NEXT_PUBLIC_EMAILJS_PUBLIC_KEY, NEXT_PUBLIC_EMAILJS_PRIVATE_KEY } = process.env;
+  const { NEXT_PUBLIC_EMAILJS_PUBLIC_KEY, NEXT_PUBLIC_EMAILJS_PRIVATE_KEY } =
+    process.env;
 
   const templateParams = {
     to_name: "Ricky",
