@@ -25,9 +25,5 @@ export async function GET() {
   });
 
   const data = await response.json();
-
-  return NextResponse.json(
-    { idea: data.choices[0].message.content },
-    { status: 200 }
-  );
+  return NextResponse.json({ message: "Success", status: 200 });
 }

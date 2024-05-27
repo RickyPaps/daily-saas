@@ -36,6 +36,8 @@ export async function GET(request: Request) {
     message: data?.choices[0]?.message.content,
   };
 
+  console.log(templateParams);
+
   try {
     emailjs
       .send("service_6wug1nq", "template_mwg23tn", templateParams, {
