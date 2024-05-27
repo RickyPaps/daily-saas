@@ -4,7 +4,11 @@ import emailjs from "@emailjs/nodejs";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  const { NEXT_PUBLIC_OPENAI_API_KEY } = process.env;
+  const {
+    NEXT_PUBLIC_OPENAI_API_KEY,
+    EMAILJS_PUBLIC_KEY,
+    EMAILJS_PRIVATE_KEY,
+  } = process.env;
 
   const messages = [
     {
@@ -13,6 +17,8 @@ export async function GET(request: Request) {
         "Generate me a small and new SaaS product idea that can be built with Next.js and TailwindCSS. The idea should be precise and be able to be completed in a day. If you refence any API's to be used please reference the API's. If the idea is using Authentication, we will be using Clerk. The idea is to increase my skills in my craft and add more projects into my portfolio. Also, Please generate me a rough UI design.",
     },
   ];
+
+  console.log(messages);
 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -26,26 +32,28 @@ export async function GET(request: Request) {
     }),
   });
 
+  console.log(response);
+
   const data = await response.json();
 
-  const { EMAILJS_PUBLIC_KEY, EMAILJS_PRIVATE_KEY } = process.env;
+  return NextResponse.json({ message: "Success", status: 200 });
 
-  const templateParams = {
-    to_name: "Ricky",
-    message: data?.choices[0]?.message.content,
-  };
+  // const templateParams = {
+  //   to_name: "Ricky",
+  //   message: data?.choices[0]?.message.content,
+  // };
 
-  try {
-    emailjs
-      .send("service_6wug1nq", "template_mwg23tn", templateParams, {
-        publicKey: EMAILJS_PUBLIC_KEY!,
-        privateKey: EMAILJS_PRIVATE_KEY!,
-      })
-      .then((response) => {
-        console.log(response);
-      });
-    return NextResponse.json({ message: "Success", status: 200 });
-  } catch (error) {
-    return NextResponse.json({ message: error, status: 500 });
-  }
+  // try {
+  //   emailjs
+  //     .send("service_6wug1nq", "template_mwg23tn", templateParams, {
+  //       publicKey: EMAILJS_PUBLIC_KEY!,
+  //       privateKey: EMAILJS_PRIVATE_KEY!,
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //     });
+  //   return NextResponse.json({ message: "Success", status: 200 });
+  // } catch (error) {
+  //   return NextResponse.json({ message: error, status: 500 });
+  // }
 }
