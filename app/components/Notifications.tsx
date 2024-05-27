@@ -2,9 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useFetchGenerate, useSendEmail } from "../Hooks/useChatGptPrompt";
 
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
-
 const Notifications: React.FC = () => {
   const ref = useRef<HTMLPreElement>(null);
   const [idea, setIdea] = useState<string | null>(null);
