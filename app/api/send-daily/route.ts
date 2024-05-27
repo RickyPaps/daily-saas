@@ -3,7 +3,6 @@ import emailjs from "@emailjs/nodejs";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-
   const messages = [
     {
       role: "user",
@@ -53,9 +52,9 @@ export async function GET(request: Request) {
       },
       body: JSON.stringify(msgData),
     });
+    console.log("Email sent successfully");
     return NextResponse.json({ message: "Success", status: 200 });
   } catch (error) {
     return NextResponse.json({ message: error, status: 500 });
   }
-
 }
