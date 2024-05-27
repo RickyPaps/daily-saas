@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { NextResponse } from "next/server";
 export async function GET() {
   const { NEXT_PUBLIC_OPENAI_API_KEY } = process.env;
