@@ -1,4 +1,3 @@
-
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
@@ -12,9 +11,28 @@ export async function POST(req: Request) {
     process.env;
 
   const templateParams = {
-    to_name: "Ricky",
+    to_name: "Rickypapini@gmail.com",
     message: data,
   };
+
+  // var msgData = {
+  //   service_id: "service_6wug1nq",
+  //   template_id: "template_mwg23tn",
+  //   user_id: NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+  //   accessToken: NEXT_PUBLIC_EMAILJS_PRIVATE_KEY,
+  //   template_params: {
+  //     username: templateParams.to_name,
+  //     message: templateParams.message,
+  //   },
+  // };
+
+  // fetch("https://api.emailjs.com/api/v1.0/email/send", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(msgData),
+  // });
 
   try {
     emailjs

@@ -32,7 +32,7 @@ export async function GET(request: Request) {
   const data = await response.json();
 
   const templateParams = {
-    to_name: "Ricky",
+    to_name: "Rickypapini@gmail.com",
     message: data?.choices[0]?.message.content,
   };
 
