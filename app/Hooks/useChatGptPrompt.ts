@@ -22,16 +22,16 @@ export const useSendEmail = async (idea: string) => {
     },
   };
   debugger;
+
   try {
-    fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(msgData),
     }).then((res) => {
-      debugger;
-      return res.json();
+      console.log(res);
     });
   } catch (error) {
     console.log(error);

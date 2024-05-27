@@ -28,15 +28,16 @@ export async function POST(req: Request) {
   };
 
   try {
-    fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(msgData),
+    }).then(() => {
+      return NextResponse.json({ message: "Email sent", success: true });
     });
-    return NextResponse.json({ message: "Success", status: 200 });
   } catch (error) {
-    return NextResponse.json({ message: error, status: 500 });
+    console.log(error);
   }
 }

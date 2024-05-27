@@ -13,7 +13,10 @@ const Notifications: React.FC = () => {
 
       // const SendEmail = async () => {
       //   debugger;
-      //   useSendEmail(idea);
+      //   const data = await useSendEmail(idea);
+      //   const msg = JSON.stringify(data);
+
+      //   console.log(msg);
       // };
       // SendEmail();
     }
