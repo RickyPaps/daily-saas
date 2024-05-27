@@ -11,7 +11,7 @@ export async function GET() {
     },
   ];
 
-  const respone = await fetch("https://api.openai.com/v1/chat/completions", {
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export async function GET() {
     }),
   });
 
-  const data = await respone.json();
+  const data = await response.json();
 
   return NextResponse.json(
     { idea: data.choices[0].message.content },
