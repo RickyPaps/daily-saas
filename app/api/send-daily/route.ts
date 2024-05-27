@@ -54,6 +54,7 @@ export async function GET(request: Request) {
     }).then(() => {
       return NextResponse.json({ message: "Email sent", success: true });
     });
+    return NextResponse.json({ message: "Email sent", success: true });
   } catch (error) {
     console.log(error);
   }
