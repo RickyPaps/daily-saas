@@ -7,23 +7,20 @@ const Notifications: React.FC = () => {
   const [idea, setIdea] = useState<string | null>(null);
 
   useEffect(() => {
-    debugger;
     if (ref.current && idea) {
       ref.current.innerHTML = idea;
 
-      // const SendEmail = async () => {
-      //   debugger;
-      //   const data = await useSendEmail(idea);
-      //   const msg = JSON.stringify(data);
+      const SendEmail = async () => {
+        const data = await useSendEmail(idea);
+        const msg = JSON.stringify(data);
 
-      //   console.log(msg);
-      // };
-      // SendEmail();
+        console.log(msg);
+      };
+      SendEmail();
     }
   }, [idea]);
 
   useEffect(() => {
-    debugger;
     const FetchIdea = async () => {
       const data = await useFetchGenerate();
       setIdea(data);

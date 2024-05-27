@@ -12,7 +12,6 @@ export const useSendEmail = async (idea: string) => {
     },
     body: JSON.stringify(idea),
   });
-  debugger;
   const data = await response.json();
   return data;
 };
