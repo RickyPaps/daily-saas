@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${
-        process.env.NEXT_PUBLIC_OPENAI_API_KEY as string
+        NEXT_PUBLIC_OPENAI_API_KEY as string
       }`,
     },
     body: JSON.stringify({
@@ -35,8 +35,8 @@ export async function GET(request: Request) {
   var msgData = {
     service_id: "service_6wug1nq",
     template_id: "template_mwg23tn",
-    user_id: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string,
-    accessToken: process.env.NEXT_PUBLIC_EMAILJS_PRIVATE_KEY as string,
+    user_id: NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string,
+    accessToken: NEXT_PUBLIC_EMAILJS_PRIVATE_KEY as string,
     template_params: {
       to_name: "Ricky",
       email: templateParams.to_name,
