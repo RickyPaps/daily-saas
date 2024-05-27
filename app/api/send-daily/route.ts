@@ -30,14 +30,15 @@ export async function GET(request: Request) {
     }),
   });
 
-  console.log(response);
-
   const data = await response.json();
 
   const templateParams = {
     to_name: "Ricky",
     message: data?.choices[0]?.message.content,
   };
+
+  console.log(templateParams);
+
 
   try {
     emailjs
@@ -46,7 +47,7 @@ export async function GET(request: Request) {
         privateKey: EMAILJS_PRIVATE_KEY!,
       })
       .then((response) => {
-        console.log(response);
+        console.log('email sent', response);
       });
     return NextResponse.json({ message: "Success", status: 200 });
   } catch (error) {
