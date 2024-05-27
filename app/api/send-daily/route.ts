@@ -32,11 +32,9 @@ export async function GET(request: Request) {
   const data = await response.json();
 
   const templateParams = {
-    to_name: "Rickypapini@gmail.com",
+    to_name: "Ricky",
     message: data?.choices[0]?.message.content,
   };
-
-  console.log(templateParams);
 
   try {
     emailjs
