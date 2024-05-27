@@ -2,6 +2,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useFetchGenerate, useSendEmail } from "../Hooks/useChatGptPrompt";
 
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 const Notifications: React.FC = () => {
   const ref = useRef<HTMLPreElement>(null);
   const [idea, setIdea] = useState<string | null>(null);
@@ -15,18 +18,6 @@ const Notifications: React.FC = () => {
         const data = await useSendEmail(idea);
         console.log(data);
       };
-
-      // const response = await fetch("/api/send-email", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(data),
-      // });
-
-      // const data2 = await response.json();
-      // console.log(data2);
-
       SendEmail();
     }
   }, [idea]);
