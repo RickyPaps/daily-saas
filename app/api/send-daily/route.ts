@@ -3,11 +3,6 @@ import emailjs from "@emailjs/nodejs";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-  const {
-    NEXT_PUBLIC_OPENAI_API_KEY,
-    NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-    NEXT_PUBLIC_EMAILJS_PRIVATE_KEY,
-  } = process.env;
 
   const messages = [
     {
@@ -21,7 +16,9 @@ export async function GET(request: Request) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${NEXT_PUBLIC_OPENAI_API_KEY}`,
+      Authorization: `Bearer ${
+        process.env.NEXT_PUBLIC_OPENAI_API_KEY as string
+      }`,
     },
     body: JSON.stringify({
       messages: messages,
@@ -39,8 +36,8 @@ export async function GET(request: Request) {
   var msgData = {
     service_id: "service_6wug1nq",
     template_id: "template_mwg23tn",
-    user_id: NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-    accessToken: NEXT_PUBLIC_EMAILJS_PRIVATE_KEY,
+    user_id: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string,
+    accessToken: process.env.NEXT_PUBLIC_EMAILJS_PRIVATE_KEY as string,
     template_params: {
       to_name: "Ricky",
       email: templateParams.to_name,
@@ -48,25 +45,17 @@ export async function GET(request: Request) {
     },
   };
 
-  fetch("https://api.emailjs.com/api/v1.0/email/send", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(msgData),
-  });
-
   try {
-    emailjs
-      .send("service_6wug1nq", "template_mwg23tn", templateParams, {
-        publicKey: NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
-        privateKey: NEXT_PUBLIC_EMAILJS_PRIVATE_KEY!,
-      })
-      .then((response) => {
-        console.log("email sent", response);
-      });
+    fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(msgData),
+    });
     return NextResponse.json({ message: "Success", status: 200 });
   } catch (error) {
     return NextResponse.json({ message: error, status: 500 });
   }
+
 }

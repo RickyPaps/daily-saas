@@ -12,8 +12,8 @@ const Notifications: React.FC = () => {
       ref.current.innerHTML = idea;
 
       const SendEmail = async () => {
-        const data = await useSendEmail(idea);
-        console.log(data);
+        debugger;
+        useSendEmail(idea);
       };
       SendEmail();
     }

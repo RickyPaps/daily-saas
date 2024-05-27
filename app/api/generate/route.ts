@@ -2,8 +2,6 @@ export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
 export async function GET() {
-  const { NEXT_PUBLIC_OPENAI_API_KEY } = process.env;
-
   const messages = [
     {
       role: "user",
@@ -16,7 +14,9 @@ export async function GET() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${NEXT_PUBLIC_OPENAI_API_KEY}`,
+      Authorization: `Bearer ${
+        process.env.NEXT_PUBLIC_OPENAI_API_KEY as string
+      }`,
     },
     body: JSON.stringify({
       messages: messages,
