@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import emailjs from "@emailjs/nodejs";
 import { NextResponse } from "next/server";
 
