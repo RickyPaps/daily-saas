@@ -23,15 +23,18 @@ export async function POST(req: Request) {
   };
 
   try {
-    await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(msgData),
-    }).then(() => {
-      return NextResponse.json({ message: "Email sent", success: true });
     });
+
+    if (!res.ok) {
+      throw new Error("Failed to send email");
+    }
+    return NextResponse.json({ message: "Email sent", success: true });
   } catch (error) {
     console.log(error);
   }

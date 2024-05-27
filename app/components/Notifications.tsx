@@ -12,9 +12,8 @@ const Notifications: React.FC = () => {
 
       const SendEmail = async () => {
         const data = await useSendEmail(idea);
-        const msg = JSON.stringify(data);
 
-        console.log(msg);
+        console.log(data);
       };
       SendEmail();
     }
