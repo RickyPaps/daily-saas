@@ -1,5 +1,7 @@
+import emailjs from "@emailjs/nodejs";
 import { NextResponse } from "next/server";
-export async function GET() {
+
+export async function GET(request: Request) {
   const { NEXT_PUBLIC_OPENAI_API_KEY } = process.env;
 
   const messages = [
@@ -24,8 +26,24 @@ export async function GET() {
 
   const data = await response.json();
 
-  return NextResponse.json(
-    { idea: data.choices[0].message.content },
-    { status: 200 }
-  );
+  const { EMAILJS_PUBLIC_KEY, EMAILJS_PRIVATE_KEY } = process.env;
+
+  const templateParams = {
+    to_name: "Ricky",
+    message: data?.choices[0]?.message.content,
+  };
+
+  try {
+    emailjs
+      .send("service_6wug1nq", "template_mwg23tn", templateParams, {
+        publicKey: EMAILJS_PUBLIC_KEY!,
+        privateKey: EMAILJS_PRIVATE_KEY!,
+      })
+      .then((response) => {
+        console.log(response);
+      });
+    return NextResponse.json({ message: "Success", status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: error, status: 500 });
+  }
 }
