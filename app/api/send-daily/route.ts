@@ -37,8 +37,6 @@ export async function GET(request: Request) {
 
   const data = await response.json();
 
-  return NextResponse.json({ message: "Success", status: 200 });
-
   const templateParams = {
     to_name: "Ricky",
     message: data?.choices[0]?.message.content,

@@ -11,7 +11,6 @@ const Notifications: React.FC = () => {
       ref.current.innerHTML = idea;
 
       const SendEmail = async () => {
-        debugger;
         const data = await useSendEmail(idea);
         console.log(data);
       };
@@ -21,9 +20,7 @@ const Notifications: React.FC = () => {
 
   useEffect(() => {
     const FetchIdea = async () => {
-      debugger;
       const data = await useFetchGenerate();
-
       setIdea(data);
     };
     FetchIdea();
