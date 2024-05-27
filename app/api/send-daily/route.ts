@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 import emailjs from "@emailjs/nodejs";
 import { NextResponse } from "next/server";
 
@@ -35,6 +35,26 @@ export async function GET(request: Request) {
     to_name: "Rickypapini@gmail.com",
     message: data?.choices[0]?.message.content,
   };
+
+  var msgData = {
+    service_id: "service_6wug1nq",
+    template_id: "template_mwg23tn",
+    user_id: NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+    accessToken: NEXT_PUBLIC_EMAILJS_PRIVATE_KEY,
+    template_params: {
+      to_name: "Ricky",
+      email: templateParams.to_name,
+      message: templateParams.message,
+    },
+  };
+
+  fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(msgData),
+  });
 
   try {
     emailjs
