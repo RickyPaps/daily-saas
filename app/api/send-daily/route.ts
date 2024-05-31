@@ -1,13 +1,12 @@
 export const dynamic = "force-dynamic";
-import emailjs from "@emailjs/nodejs";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET() {
   const messages = [
     {
       role: "user",
       content:
-        "Generate me a small and new SaaS product idea that can be built with Next.js and TailwindCSS. The idea should be precise and be able to be completed in a day. If you refence any API's to be used please reference the API's. If the idea is using Authentication, we will be using Clerk. The idea is to increase my skills in my craft and add more projects into my portfolio. Also, Please generate me a rough UI design.",
+        "Please generate me a SaaS application that I can build using Next.js 14 with the App directory, TypeScript, TailwindCSS for styling Shadcn for UI components, and MongoDB with Mongoose for the database. If the application uses user login then use Clerk for authentication, but only if the application requires it. I want the SaaS idea to utilize ChatGPT models to solve problems that we might not have been able to solve before. If any API's are going to be used please reference them and their endpoints.  Finally, I would like a small breakdown as to how you think I should tackle this project over the 48 hours. From building the UI to the API calls etc.",
     },
   ];
 
@@ -21,7 +20,7 @@ export async function GET(request: Request) {
     },
     body: JSON.stringify({
       messages: messages,
-      model: "gpt-3.5-turbo-16k",
+      model: "gpt-4-turbo",
     }),
   });
 

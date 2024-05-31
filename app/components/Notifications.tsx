@@ -9,13 +9,6 @@ const Notifications: React.FC = () => {
   useEffect(() => {
     if (ref.current && idea) {
       ref.current.innerHTML = idea;
-
-      const SendEmail = async () => {
-        const data = await useSendEmail(idea);
-
-        console.log(data);
-      };
-      SendEmail();
     }
   }, [idea]);
 
