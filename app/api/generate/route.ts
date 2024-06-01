@@ -15,12 +15,12 @@ export async function GET() {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${
-        process.env.NEXT_PUBLIC_OPENAI_API_KEY as string
+        process.env.NEXT_PUBLIC_OPENAI_API_KEY as string 
       }`,
     },
     body: JSON.stringify({
       messages: messages,
-      model: "gpt-4-turbo",
+      model: "gpt-4",
     }),
   });
 

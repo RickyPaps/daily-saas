@@ -20,7 +20,7 @@ export async function GET() {
     },
     body: JSON.stringify({
       messages: messages,
-      model: "gpt-4-turbo",
+      model: "gpt-4",
     }),
   });
 
