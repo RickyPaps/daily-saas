@@ -1,8 +1,8 @@
 {
-    "crons": [
-      {
-        "schedule": "0 9  * * 1",
-        "path": "/api/send-daily"
-      }
-    ]
-  }
+  "crons": [
+    {
+      "schedule": "0 9  * * 1",
+      "path": "/api/send-daily"
+    }
+  ]
+}
