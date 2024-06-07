@@ -5,7 +5,7 @@ export const maxDuration = 60; // This function can run for a maximum of 60 seco
 export async function GET(req: Request) {
   const auth = req.headers.get("Authorization");
 
-  if (auth !== "Bearer " + process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
+  if (auth !== `Bearer ${process.env.CRON_SECRET as string}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
