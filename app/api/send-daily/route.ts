@@ -2,7 +2,13 @@ export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 export const maxDuration = 60; // This function can run for a maximum of 60 seconds
 
-export async function GET() {
+export async function GET(req: Request) {
+  const auth = req.headers.get("Authorization");
+
+  if (auth !== "Bearer " + process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const messages = [
     {
       role: "user",
@@ -11,38 +17,45 @@ export async function GET() {
     },
   ];
 
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${
-        process.env.NEXT_PUBLIC_OPENAI_API_KEY as string
-      }`,
-    },
-    body: JSON.stringify({
-      messages: messages,
-      model: "gpt-4",
-    }),
-  });
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${
+          process.env.NEXT_PUBLIC_OPENAI_API_KEY as string
+        }`,
+      },
+      body: JSON.stringify({
+        messages: messages,
+        model: "gpt-4",
+      }),
+    });
 
-  const data = await response.json();
+    const data = await response.json();
 
-  const templateParams = {
-    to_name: "Rickypapini@gmail.com",
-    message: data?.choices[0]?.message.content,
-  };
+    const templateParams = {
+      to_name: "Rickypapini@gmail.com",
+      message: data?.choices[0]?.message.content,
+    };
 
-  var msgData = {
-    service_id: "service_6wug1nq",
-    template_id: "template_mwg23tn",
-    user_id: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string,
-    accessToken: process.env.NEXT_PUBLIC_EMAILJS_PRIVATE_KEY as string,
-    template_params: {
-      to_name: "Ricky",
-      email: templateParams.to_name,
-      message: templateParams.message,
-    },
-  };
+    var msgData = {
+      service_id: "service_6wug1nq",
+      template_id: "template_mwg23tn",
+      user_id: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY as string,
+      accessToken: process.env.NEXT_PUBLIC_EMAILJS_PRIVATE_KEY as string,
+      template_params: {
+        to_name: "Ricky",
+        email: templateParams.to_name,
+        message: templateParams.message,
+      },
+    };
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to fetch data" },
+      { status: 500 }
+    );
+  }
 
   try {
     const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
@@ -52,12 +65,11 @@ export async function GET() {
       },
       body: JSON.stringify(msgData),
     });
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch data");
-    }
     return NextResponse.json({ message: "Email sent", success: true });
   } catch (error) {
-    console.log(error);
+    return NextResponse.json(
+      { error: "Failed to fetch data" },
+      { status: 500 }
+    );
   }
 }
